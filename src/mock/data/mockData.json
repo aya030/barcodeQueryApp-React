@@ -1,0 +1,50 @@
+[
+  {
+    "id": "uuid-1",
+    "name": "pencil _blue",
+    "code": "45001234567890",
+    "image": "image-1"
+  },
+  {
+    "id": "uuid-2",
+    "name": "pancil _pink",
+    "code": "45001234567891",
+    "image": "image-1"
+  },
+  {
+    "id": "uuid-3",
+    "name": "pancil case",
+    "code": "45001234567901",
+    "image": "image-2"
+  },
+  {
+    "id": "uuid-4",
+    "name": "notebook",
+    "code": "45001234567702",
+    "image": "image-3"
+  },
+  {
+    "id": "uuid-5",
+    "name": "eraser",
+    "code": "45001234567603",
+    "image": "image-4"
+  },
+  {
+    "id": "uuid-6",
+    "name": "stapler",
+    "code": "45001234567504",
+    "image": "image-5"
+  },
+  {
+    "id": "uuid-7",
+    "name": "ruler",
+    "code": "45001234567403",
+    "image": "image-5"
+  },
+  {
+    "id": "uuid-8",
+    "name": "sticky note _sakura",
+    "code": "45001234567504",
+    "image": "image-5"
+  }
+]
