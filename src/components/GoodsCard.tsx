@@ -32,7 +32,7 @@ export const GoodsCardComponent = memo(() => {
     <>
       <Box
         display="flex"
-        justifyContent="space-beetween"
+        justifyContent="center"
         flexWrap="wrap"
         mx="auto"
         textAlign="center"
