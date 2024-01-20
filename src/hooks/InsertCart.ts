@@ -1,18 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback } from "react";
 import { ResBody } from "../types/type";
-import { cartDataState } from "../recoil/recoiState";
-import { useRecoilState } from "recoil";
+import useStore from "../store/storeState";
 
 export const InsertCart = () => {
-  const [cartArray, setCartArray] = useRecoilState(cartDataState);
+
+  const { cartData, updateCartData } = useStore((state) => ({
+    cartData: state.cartData,
+    updateCartData: state.updateCartData
+  }))
 
   const insertCheck = useCallback(
     (list: ResBody, number: string) => {
-      setCartArray([...cartArray, { list: list, number: number }]);
+      updateCartData([...cartData, { list: list, number: number }]);
     },
-    [cartArray]
+    [cartData]
   );
 
-  return { insertCheck, cartArray };
+  return { insertCheck, cartData };
 };

@@ -2,20 +2,19 @@
 import axios, { AxiosResponse } from "axios";
 import { useCallback, useState } from "react";
 import { ResBody } from "../types/type";
-import { useRecoilState } from "recoil";
-import {
-  barcodeListState,
-  modalOpenState,
-  soloDataState,
-} from "../recoil/recoiState";
+import useStore from "../store/storeState";
 
 export const FindGoods = () => {
   const url = "/mock/barcode-list";
-  const [barcodeList, setBarcodeList] =
-    useRecoilState<ResBody[]>(barcodeListState);
+  const { barcodeLists, soloData, modalOpen, updateBarcodeLists, updateSoloData, updateModalOpen } = useStore((state) => ({
+    barcodeLists: state.barcodeLists,
+    soloData: state.soloData,
+    modalOpen: state.modalOpen,
+    updateBarcodeLists: state.updateBarcodeLists,
+    updateSoloData: state.updateSoloData,
+    updateModalOpen: state.updateModalOpen
+  }))
   const [show, setShow] = useState(true);
-  const [modalOpen, setModalOpen] = useRecoilState(modalOpenState);
-  const [soloData, setSoloData] = useRecoilState<ResBody[]>(soloDataState);
   const readBarcode = useCallback(async (barcode: string) => {
     setShow(false);
     try {
@@ -25,10 +24,10 @@ export const FindGoods = () => {
         },
       });
       if (result.data.length == 1) {
-        setSoloData(result.data);
-        setModalOpen(true);
+        updateSoloData(result.data);
+        updateModalOpen();
       } else {
-        setBarcodeList(result.data);
+        updateBarcodeLists(result.data);
       }
     } catch (e) {
       console.log(e);
@@ -37,5 +36,5 @@ export const FindGoods = () => {
     }
   }, []);
 
-  return { show, readBarcode, soloData, barcodeList, modalOpen };
+  return { show, readBarcode, soloData, barcodeLists, modalOpen };
 };

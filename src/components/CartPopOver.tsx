@@ -21,14 +21,17 @@ import {
 } from "@chakra-ui/react";
 import { memo, useRef } from "react";
 import { SelectBarcode } from "../hooks/SelectBarcode";
-import { useRecoilState } from "recoil";
-import { cartDataState } from "../recoil/recoiState";
+import useStore from "../store/storeState";
 
 export const PopOverComponent = memo(() => {
   const cancelRef = useRef<HTMLButtonElement>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { selectBarcode } = SelectBarcode();
-  const [cartArray, setCartArray] = useRecoilState(cartDataState);
+
+  const { cartData, updateCartData } = useStore((state) => ({
+    cartData: state.cartData,
+    updateCartData: state.updateCartData
+  }))
 
   /* カート内の商品をDELETEする処理 */
   const onCLickDelete = (id: number) => {
@@ -38,7 +41,7 @@ export const PopOverComponent = memo(() => {
   /* カート内の商品をDBに登録する時の処理 */
   const onSend = () => {
     //カートの中身を空にする
-    setCartArray([]);
+    updateCartData([]);
     onClose();
   };
 
@@ -60,7 +63,7 @@ export const PopOverComponent = memo(() => {
         <PopoverHeader>
           Confirmation!{" "}
           <Button
-            isDisabled={cartArray.length === 0}
+            isDisabled={cartData.length === 0}
             onClick={onOpen}
             colorScheme="teal"
             h="30px"
@@ -102,7 +105,7 @@ export const PopOverComponent = memo(() => {
         </PopoverHeader>
         <PopoverBody>
           <Box>
-            {cartArray.map((cart, index) => {
+            {cartData.map((cart, index) => {
               return (
                 <Box key={cart.list.id} border="2px" mb="20px" p="5px">
                   <List>

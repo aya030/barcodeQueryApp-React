@@ -13,17 +13,18 @@ import {
 import { PacmanLoader } from "react-spinners";
 import { FindGoods } from "../hooks/FindGoods";
 import { BarCodeCamera } from "../hooks/BarCodeCamera";
-import { useRecoilValue } from "recoil";
-import { cartDataState } from "../recoil/recoiState";
 import { Header } from "../components/Header";
 import { PopOverComponent } from "../components/CartPopOver";
 import { GoodsCardComponent } from "../components/GoodsCard";
+import useStore from "../store/storeState";
 
 export const BarcodeReader: FC = memo(() => {
   const { show, readBarcode } = FindGoods();
   const { barcode, ScanStart, setBarcode } = BarCodeCamera();
   const [scanCameraFlg, setScanCameraFlg] = useState(true);
-  const cartArray = useRecoilValue(cartDataState);
+  const { cartData } = useStore((state) => ({
+    cartData: state.cartData,
+  }))
 
   /* 
     QUERYボタンを押した時の処理
@@ -123,7 +124,7 @@ export const BarcodeReader: FC = memo(() => {
           bg="none"
           _hover={{ bg: "none" }}
         >
-          {cartArray.length}
+          {cartData.length}
         </Button>
       </Box>
 

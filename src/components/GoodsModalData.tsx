@@ -17,31 +17,31 @@ import {
 import React, { ChangeEventHandler, FC, memo, useCallback } from "react";
 import { ResBody } from "../types/type";
 import { InsertCart } from "../hooks/InsertCart";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { cartDataState, numberState } from "../recoil/recoiState";
+import useStore from "../store/storeState";
 
 type modalType = {
   onClose: () => void;
-  isOpen: boolean;
   modalList: ResBody[];
 };
 
 export const ModalData: FC<modalType> = memo((props) => {
-  const { onClose, isOpen, modalList } = props;
+  const { onClose, modalList } = props;
   const { insertCheck } = InsertCart();
   const regex = /^0/;
-  const [number, setNumber] = useRecoilState(numberState);
-  const cartArray = useRecoilValue(cartDataState);
+  const { modalOpen, number, updateNumber } = useStore((state) => ({
+    modalOpen: state.modalOpen,
+    number: state.number,
+    updateNumber: state.updateNumber
+  }))
 
   const onChangeNumber: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setNumber(e.target.value.replace(/[^0-9]/g, ""));
+    updateNumber(e.target.value.replace(/[^0-9]/g, ""));
   };
 
   const onSend = useCallback(
     (list: ResBody, number: string) => {
-      console.log(cartArray);
       insertCheck(list, number);
-      setNumber("");
+      updateNumber("");
       onClose();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -53,7 +53,7 @@ export const ModalData: FC<modalType> = memo((props) => {
   return (
     <Modal
       initialFocusRef={initialRef}
-      isOpen={isOpen}
+      isOpen={modalOpen}
       onClose={onClose}
       autoFocus={false}
       motionPreset="scale"

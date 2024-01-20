@@ -1,22 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback } from "react";
-import { useRecoilState } from "recoil";
-import { cartDataState } from "../recoil/recoiState";
+
+import useStore from "../store/storeState";
 
 type Selected = {
   id: number;
 };
 export const SelectBarcode = () => {
-  const [cartArray, setCartArray] = useRecoilState(cartDataState);
-
+  const { cartData, updateCartData } = useStore((state) => ({
+    cartData: state.cartData,
+    updateCartData: state.updateCartData,
+  }));
   const selectBarcode = useCallback(
     ({ id }: Selected) => {
-      const target = cartArray.filter((_array, index) => {
+      const target = cartData.filter((_array, index) => {
         return index !== id;
       });
-      setCartArray(target);
+      updateCartData(target);
     },
-    [cartArray]
+    [cartData]
   );
 
   return { selectBarcode };
