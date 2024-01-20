@@ -104,14 +104,14 @@ http://localhost:5173/barcode でアクセスできる
 
 - Figmaにてデザイン設計を行いました
 
-<video controls="" playsinline="" width="100%" muted="true" src="./figmaDesign.mov" type="video/mov">
- Sorry, your browser doesn't support embedded videos.
-</video>
+https://github.com/aya030/barcodeQueryApp-React/assets/101713134/325e71e2-c401-4cd6-9c1f-6f2a1e28d006
+
+
 
 ## Design(dev)
 
 - 動作確認用です
 
-<video controls="" playsinline="" width="100%" muted="true" src="./vite-React.mov" type="video/mov">
- Sorry, your browser doesn't support embedded videos.
-</video>
+https://github.com/aya030/barcodeQueryApp-React/assets/101713134/3ce5d144-5bf0-4680-bc9f-6bfe9dd2523f
+
+
